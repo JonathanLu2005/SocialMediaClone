@@ -1,6 +1,6 @@
 // todo flesh this out
 import React, { useState, useEffect } from "react";
-function Post({ postID }) {
+function Post({ postData }) {
   return (
     <div>
       <PostHeader></PostHeader>
