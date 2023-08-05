@@ -8,6 +8,7 @@
   height: 100vh;
   display:flex;
   flex-direction: column;
+  width:100vw
 
 }
 .navFlex {
@@ -21,7 +22,7 @@
   /* Example background color */
   border-right: 1px solid black;
   border-color: black;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 .nav-content-holder{
@@ -30,4 +31,12 @@
   height:100vh;
   flex:1
 
+}
+.circular-pfp{
+  border-radius: 50%;
+}
+.flexRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

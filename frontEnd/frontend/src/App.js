@@ -2,18 +2,22 @@ import "./App.css";
 import BackendTest from "./components/BackendTest.js";
 import NavBar from "./components/NavBar";
 import PostPage from "./PostPage";
+import Post from "./components/Post";
 function App() {
   return (
     <div className="App">
-      <h1>hello world!</h1>
-      <BackendTest></BackendTest>
       <div class="nav-content-holder">
-        <div style={{ flex: "1" }}>
+        <div style={{ flex: "3" }}>
           <NavBar></NavBar>
         </div>
-        <div style={{ flex: "20" }}>
+        <div style={{ flex: "25" }}>
           <PostPage></PostPage>
+          {/* <Post></Post> */}
         </div>
+      </div>
+      <div style={{ height: "5px" }}>
+        <BackendTest></BackendTest>
+        <p style={{}}>im only here for backend debugging</p>
       </div>
     </div>
   );
