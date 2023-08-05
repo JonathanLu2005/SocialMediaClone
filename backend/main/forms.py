@@ -1,12 +1,9 @@
-from django.db import models
+from django import forms
 
-# Create your models here.
-
-class User(models.Model):
-    userId = models.BigAutoField(primary_key=True)
+class SigningIn(forms.Form):
     fullName = models.CharField(max_length=100)
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
 
-# this is the equivelant of like creating a table in SQL basically
+# form r the django inbuilt form, so like with ur frontend pages withm <form> </form>, it does this stuff i think
