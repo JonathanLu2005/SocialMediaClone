@@ -1,4 +1,6 @@
 from django import forms
+from django.db import models
+
 
 class SigningIn(forms.Form):
     fullName = models.CharField(max_length=100)

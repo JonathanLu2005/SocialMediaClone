@@ -17,3 +17,6 @@ Making a social media clone
 - run `cd frontEnd`
 - run `cd frontend`
 - run `npm run start`
+
+## when changing frontend:
+- ensure you run ```npm run build``` in order for django to have access to your new react
