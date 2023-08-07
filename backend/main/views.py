@@ -1,38 +1,23 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect 
 from django.template import loader
+from .forms import UserForm
 
-from .models import User
-from .forms import SigningIn
 # Create your views here.
 
 def testendpoint(response):
     return HttpResponse("This is the new path!")
 
 def signup(response):
-    # want to somehow reutrn a JS page here??? alongside get the JS page data here, verify it, store it into database etc
-
-    if request.method == "POST":
-        # if post get the form data from the frontend, i think u gotta use some special django html thing
-        form = SigningIn(response.POST)
+    # if our response is POST, then form variable is UserForm from forms.py, which has all the data from the frontend
+    # this goes through inbuilt valid checking and saves to database (because in forms.py, we made model=User, so its connected to the table)
+    if response.method == "POST":
+        form = UserForm(response.POST or None)
 
         if form.is_valid():
             form.save()
-            # i think this is the inbuilt saving?
 
-        return redirect("/")
-        # once done send to account page but obv we dont have one
+        return redirect("testendpoint")
     
     else:
-        form = SigningIn()
-        # idk what this does it was just there
-
-    return render(response, "JS page??", {"form": form})
-    # need to somehow return JS page???
-
-
-# agenda
-# i will learn more about models and convert from SQL to models
-# then we gotta somehow connect it with react rather than using HTML pages
-# i will also learn more about inbuilt stuff like the save or whatever, twt didnt went into full detail so i'll do a course on it
-# hopefully once im able to fully grasp how the django database thing work here + the inbuilt forms stuff + react, we're solid
+        return render(response, "js page??", {})

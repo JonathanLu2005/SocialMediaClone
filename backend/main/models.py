@@ -9,4 +9,9 @@ class User(models.Model):
     email = models.EmailField(max_length=100, unique=True)
     password = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.fullName + " " + self.email
+    
+        # just means on the webpage when u specify so, it'll show this at the frontend
+
 # this is the equivelant of like creating a table in SQL basically
