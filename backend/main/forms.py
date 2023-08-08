@@ -1,11 +1,13 @@
 from django import forms
-from django.db import models
+from .models import User
 
 
-class SigningIn(forms.Form):
-    fullName = models.CharField(max_length=100)
-    username = models.CharField(max_length=100, unique=True)
-    email = models.EmailField(max_length=100, unique=True)
-    password = models.CharField(max_length=100)
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ["fullName", "username", "email", "password"]
+
+        # model = means its connected to the table
+        # fields r the fields user is gonna input which shall save to the model which is user which is our table
 
 # form r the django inbuilt form, so like with ur frontend pages withm <form> </form>, it does this stuff i think

@@ -15,10 +15,10 @@ function App() {
           {/* <Post></Post> */}
         </div>
       </div>
-      <div style={{ height: "5px" }}>
+      {/* <div style={{ height: "5px" }}>
         <BackendTest></BackendTest>
         <p style={{}}>im only here for backend debugging</p>
-      </div>
+      </div> */}
     </div>
   );
 }
