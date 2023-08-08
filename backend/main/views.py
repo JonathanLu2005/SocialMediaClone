@@ -14,6 +14,10 @@ def testendpoint(response):
     return HttpResponse("This is the new path!")
 
 
+def renderApp(resp):
+    return render(resp, 'index.html')
+
+
 def signup(response):
     # if our response is POST, then form variable is UserForm from forms.py, which has all the data from the frontend
     # this goes through inbuilt valid checking and saves to database (because in forms.py, we made model=User, so its connected to the table)
