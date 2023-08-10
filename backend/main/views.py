@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .forms import UserForm
 
+from django.views.decorators.csrf import ensure_csrf_cookie
 # Create your views here.
 
 
@@ -17,12 +18,12 @@ def testendpoint(response):
 def renderApp(resp):
     return render(resp, 'index.html')
 
-
-def signup(response):
+@ensure_csrf_cookie
+def signup(resp):
     # if our response is POST, then form variable is UserForm from forms.py, which has all the data from the frontend
     # this goes through inbuilt valid checking and saves to database (because in forms.py, we made model=User, so its connected to the table)
-    if response.method == "POST":
-        form = UserForm(response.POST or None)
+    if resp.method == "POST":
+        form = UserForm(resp.POST or None)
 
         if form.is_valid():
             form.save()
@@ -30,4 +31,4 @@ def signup(response):
         return redirect("testendpoint")
 
     else:
-        return render(response, "js page??", {})
+        return render(resp, "index.html", {})

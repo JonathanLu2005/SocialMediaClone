@@ -3,6 +3,8 @@ import BackendTest from "./components/BackendTest.js";
 import NavBar from "./components/NavBar";
 import PostPage from "./PostPage";
 import Post from "./components/Post";
+import SignUp from "./SignUp.js";
+
 function App() {
   return (
     <div className="App">
@@ -11,7 +13,8 @@ function App() {
           <NavBar></NavBar>
         </div>
         <div style={{ flex: "25" }}>
-          <PostPage></PostPage>
+          {/*<PostPage></PostPage>*/}
+          <SignUp></SignUp>
           {/* <Post></Post> */}
         </div>
       </div>
