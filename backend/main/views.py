@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .forms import UserForm
 
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -18,7 +18,8 @@ def testendpoint(response):
 def renderApp(resp):
     return render(resp, 'index.html')
 
-@ensure_csrf_cookie
+# use this to bypass CSRF for anything relate dto do with posts
+@csrf_exempt
 def signup(resp):
     # if our response is POST, then form variable is UserForm from forms.py, which has all the data from the frontend
     # this goes through inbuilt valid checking and saves to database (because in forms.py, we made model=User, so its connected to the table)

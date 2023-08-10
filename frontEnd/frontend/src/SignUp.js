@@ -7,6 +7,8 @@ export default function SignUp() {
                 <label>Your name: </label>
                 <input type="text" name="fullName" placeholder="Your name please"></input>
 
+                {/* only important thing here is that u see name?, make sure its the same as the fields within forms, thats the connection*/}
+
                 <br></br>
 
                 <label>Username: </label>
