@@ -6,3 +6,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'  # Use this to include all fields from the model
+
+
+class ImageUploadSerializer(serializers.Serializer):
+    image = serializers.ImageField()
+    width = serializers.IntegerField()
+    height = serializers.IntegerField()

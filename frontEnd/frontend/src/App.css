@@ -26,11 +26,12 @@
 }
 
 .nav-content-holder{
+
   display: flex;
   flex-direction: row;
   height:100vh;
-  flex:1
-
+  flex:1;
+  z-index:20;
 }
 .circular-pfp{
   border-radius: 50%;
@@ -46,3 +47,75 @@
   /* border-bottom: 1px solid black ;
   border-width:25% */
 }
+.modal{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+    /* Apply blur to the background */
+  z-index: 2;
+
+}
+.blur-bg{
+    backdrop-filter: blur(10px);
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+      box-sizing: border-box;
+        /* Ensure padding is included in the sizing */
+}
+.dimSelector{
+  display: flex;
+  flex-direction: row;
+}
+/* .modal-fade-in{
+    transform: scale(0.8);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.modal-fade-in.active {
+  transform: scale(1);
+  opacity: 1;
+} */
+
+
+/* Add these styles to your existing CSS file
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  transform: scale(0.8);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+  transform: scale(1);
+  opacity: 1;
+} */
