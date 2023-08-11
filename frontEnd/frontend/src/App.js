@@ -33,6 +33,7 @@ import React, { useState } from "react";
 import "./App.css";
 import NavBar from "./components/NavBar";
 import PostPage from "./PostPage";
+import SignUp from "./SignUp.js";
 
 function App() {
   const [toRender, setToRender] = useState({
@@ -55,8 +56,9 @@ function App() {
           <NavBar updateRender={updateRender} />
         </div>
         <div style={{ flex: "25" }}>
-          {toRender.main}
-          {toRender.modal}
+          {/*<PostPage></PostPage>*/}
+          <SignUp></SignUp>
+          {/* <Post></Post> */}
         </div>
       </div>
     </div>

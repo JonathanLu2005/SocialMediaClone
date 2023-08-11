@@ -15,6 +15,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect  # Add this
 import binascii
 
 
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 
@@ -25,12 +26,15 @@ def testendpoint(response):
 def renderApp(resp):
     return render(resp, 'index.html')
 
+# use this to bypass CSRF for anything relate dto do with posts
 
-def signup(response):
+
+@csrf_exempt
+def signup(resp):
     # if our response is POST, then form variable is UserForm from forms.py, which has all the data from the frontend
     # this goes through inbuilt valid checking and saves to database (because in forms.py, we made model=User, so its connected to the table)
-    if response.method == "POST":
-        form = UserForm(response.POST or None)
+    if resp.method == "POST":
+        form = UserForm(resp.POST or None)
 
         if form.is_valid():
             form.save()
@@ -102,3 +106,4 @@ def resize(request, format=None):
 # @csrf_exempt
 # def resize(request, format=None):
 #     return resizeWrapper(request)
+        return render(resp, "index.html", {})
