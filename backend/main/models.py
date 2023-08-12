@@ -10,7 +10,7 @@ class User(models.Model):
     password = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.fullName + " " + self.email
+        return self.username + " " + self.email + " " + self.password
     
         # just means on the webpage when u specify so, it'll show this at the frontend
 

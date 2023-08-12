@@ -10,10 +10,10 @@ from rest_framework.response import Response
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from .forms import UserForm
+from .forms import UserForm, UserLoginForm
 from django.views.decorators.csrf import csrf_exempt, csrf_protect  # Add this
 import binascii
-
+from django.contrib import messages
 
 from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
@@ -28,7 +28,55 @@ def renderApp(resp):
 
 # use this to bypass CSRF for anything relate dto do with posts
 
+@csrf_exempt
+def login(resp):
+    if resp.method == "POST":
+        form = UserLoginForm(resp.POST or None)
 
+        if form.is_valid():
+            Logindata = form.cleaned_data
+            usernameLogin = Logindata["username"]
+            emailLogin = Logindata["email"]
+            passwordLogin = Logindata["password"]
+
+            userData = User.objects()
+
+            userData = User.objects.raw("""
+SELECT username, password
+FROM User
+WHERE email = %s""",
+[emailLogin])
+            
+            try:
+                userUsername = userData[0]
+                userPassword = userData[1]
+            except:
+                # user just doesnt exist
+                return redirect("testendpoint")
+
+            if userUsername == usernameLogin:
+                if userPassword == passwordLogin:
+                    print("successful login")
+                    return redirect("testendpoint")
+                
+                else:
+                    # want to be able to somehow send this error message to frontend?? django use messages but i tried that and it doesnt work
+                    messages.success(resp, ("Incorrect password."))
+
+            else:
+                # want to be able to somehow send this error message to frontend?? django use messages but i tried that and it doesnt work
+                messages.success(resp, ("Incorrect username."))
+
+        else:
+            # want to be able to somehow send this error message to frontend?? django use messages but i tried that and it doesnt work
+            messages.success(resp, ("Form is not valid."))
+
+
+    else:
+        return render(resp, "index.html", {})
+
+
+# sign up and create account
 @csrf_exempt
 def signup(resp):
     # if our response is POST, then form variable is UserForm from forms.py, which has all the data from the frontend
@@ -36,13 +84,41 @@ def signup(resp):
     if resp.method == "POST":
         form = UserForm(resp.POST or None)
 
-        if form.is_valid():
-            form.save()
+        # need to get email out and compare and see if person exist or not, need to get username out and see if its already taken
 
-        return redirect("testendpoint")
+        if form.is_valid():
+            SignUpdata = form.cleaned_data
+            usernameEntered = SignUpdata["username"]
+            emailEntered = SignUpdata["email"]
+            # i get hte data from form, then get the username and email the user sent
+
+            # if this is a new og username, then the try will fail, so in except, save the form because the username is original!
+            # if not then within try, and it doesnt causes an issue, means the username already exist, ppl cant have same usernames!!!
+            try:
+                usernameModel = User.objects.get(username=usernameEntered)
+                # want to be able to somehow send this error message to frontend?? django use messages but i tried that and it doesnt work
+                messages.success(resp, ("This username has already been taken."))
+
+            except:
+                form.save()
+                return redirect("testendpoint")
+            
+            try:
+                emailModel = User.objects.get(email=emailEntered)
+                # want to be able to somehow send this error message to frontend?? django use messages but i tried that and it doesnt work
+                messages.success(resp, ("This email has already been taken."))
+
+            except:
+                form.save()
+                return redirect("testendpoint")
+            
+        else:
+            # want to be able to somehow send this error message to frontend?? django use messages but i tried that and it doesnt work
+            messages.success(resp, ("Form is not valid."))
+
 
     else:
-        return render(response, "js page??", {})
+        return render(resp, "index.html", {})
 
 
 @csrf_exempt  # This skips csrf validation. Use csrf_protect to have validation, it shuts django up, but may need to change this as it is designed to stop xss
@@ -106,4 +182,4 @@ def resize(request, format=None):
 # @csrf_exempt
 # def resize(request, format=None):
 #     return resizeWrapper(request)
-        return render(resp, "index.html", {})
+#        return render(resp, "index.html", {})
