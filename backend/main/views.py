@@ -23,6 +23,7 @@ def testendpoint(response):
     return HttpResponse("This is the new path!")
 
 
+@csrf_exempt
 def renderApp(resp):
     return render(resp, 'index.html')
 
@@ -38,11 +39,9 @@ def signup(resp):
 
         if form.is_valid():
             form.save()
-
-        return redirect("testendpoint")
-
+        return redirect('testEndPoint')
     else:
-        return render(response, "js page??", {})
+        return render(resp, "index.html", {})
 
 
 @csrf_exempt  # This skips csrf validation. Use csrf_protect to have validation, it shuts django up, but may need to change this as it is designed to stop xss
