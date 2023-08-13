@@ -34,6 +34,9 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import PostPage from "./PostPage";
 import SignUp from "./SignUp.js";
+import Login from "./Login.js";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [toRender, setToRender] = useState({
