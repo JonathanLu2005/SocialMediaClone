@@ -1,6 +1,9 @@
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
+
 export default function SignUp() {
+  const navigator = useNavigate(); //this hook creates a link to the routes set up in app.js
   return (
     <div class="container">
       <div class="card">
@@ -69,22 +72,25 @@ export default function SignUp() {
                 class="btn btn-primary"
                 onClick={() => {
                   fetch("/signup");
+                  //use the navigator as before if the account is made sucessfully
                 }}
               >
                 Sign Up
               </button>
 
-              {/*
-
-                            tried to make link so it go to the login JS page???
-                            <a class="link-opacity-75-hover"
-                                onClick {() => {
-                                    fetch("/login");
-                                }}
-                            >
-                            Already have an account?
-                            </a>
-                            */}
+              {
+                // tried to make link so it go to the login JS page???
+                <a
+                  class="link-opacity-75-hover"
+                  onClick={() => {
+                    //fetch("/login");
+                    //instead of the fetch, we should navigate
+                    navigator("/login");
+                  }}
+                >
+                  Already have an account?
+                </a>
+              }
             </center>
           </form>
         </div>
